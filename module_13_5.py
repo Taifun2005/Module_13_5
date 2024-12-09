@@ -15,6 +15,7 @@ class UserState(StatesGroup):
     growth = State()
     weight = State()
 
+
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 button1 = KeyboardButton(text='Информация')
 button2 = KeyboardButton(text='Рассчитать')
@@ -25,7 +26,9 @@ kb.insert(button2)
 
 @dp.message_handler(commands=['start'])
 async def start_message(message: types.Message):
-    await message.answer('Привет! Я бот помогающий твоему здоровью введите "Рассчитать", или нажмите соответствующую кнопку, чтобы посчитать вашу норму колорий', reply_markup=kb)
+    await message.answer(
+        'Привет! Я бот помогающий твоему здоровью введите "Рассчитать", или нажмите соответствующую кнопку, чтобы посчитать вашу норму колорий',
+        reply_markup=kb)
 
 
 @dp.message_handler(text='Рассчитать')
@@ -61,9 +64,11 @@ async def send_calories(message, state):
     await state.finish()
 
 
-@dp.message_handler(text = 'Информация')
+@dp.message_handler(text='Информация')
 async def inform(message):
-    await message.answer('Привет! Я бот помогающий твоему здоровью введите "Рассчитать" чтобы посчитать вашу норму колорий')
+    await message.answer(
+        'Привет! Я бот помогающий твоему здоровью введите "Рассчитать" чтобы посчитать вашу норму колорий')
+
 
 @dp.message_handler()
 async def all_message(message):
@@ -73,8 +78,6 @@ async def all_message(message):
 
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
-
-
 
 """
 from aiogram import Bot, Dispatcher, executor, types
